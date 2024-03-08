@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   run-templating:
-    # Don't run this in the template repo or more than once in the forked repo. Check for the presence of the ".template" file 
+    # Don't run this in the template repo or more than once in the forked repo. Check for the presence of the ".template" file
     if: ${{ github.repository != 'Artemis-RGB/Artemis.PluginTemplate' && '[ -f .template ]' }}
     runs-on: ubuntu-latest
     permissions:
@@ -19,11 +19,6 @@ jobs:
           # this fetches all history so that we can read each commit
           fetch-depth: 0
           ref: ${{ github.head_ref }}
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '7.0.x'
 
       - name: Install Artemis templates
         run: dotnet new install ArtemisRGB.Templates
